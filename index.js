@@ -2,6 +2,9 @@ import express from 'express';
 import cors from 'cors';
 import { config } from 'dotenv';
 import projectsRouters from './src/routes/projects.js';
+import mongoose from 'mongoose';
+// import Projects from './src/models/projects.js';
+// import { projects as preProjects } from './src/database/preload.js';
 
 config();
 const app = express();
@@ -16,4 +19,16 @@ app.use(
 
 app.use(projectsRouters);
 
-app.listen(port, () => console.log('Server ON'));
+mongoose.set('strictQuery', true);
+mongoose
+  .connect(process.env.MONGO_URL, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
+  .then(() => {
+    app.listen(port, () => console.log('Server port :: ', port));
+    console.log('DB connected');
+    // Add data
+    // Projects.insertMany(preProjects);
+  })
+  .catch((err) => console.log('Error to connect DB :: ', err));
