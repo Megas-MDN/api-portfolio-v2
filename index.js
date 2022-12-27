@@ -1,7 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import { config } from 'dotenv';
-import projectsRouters from './routes/projects.js';
+import projectsRouters from './src/routes/projects.js';
 
 config();
 const app = express();
