@@ -10,6 +10,11 @@ const projectsSchema = mongoose.Schema(
     },
     view: String,
     source: String,
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'users',
+      required: true,
+    },
   },
   { timestamps: true }
 );

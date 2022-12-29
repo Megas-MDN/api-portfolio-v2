@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import { config } from 'dotenv';
 import projectsRouters from './src/routes/projects.js';
+import { route as loginRoute } from './src/routes/login.js';
 import mongoose from 'mongoose';
 // import Projects from './src/models/projects.js';
 // import { projects as preProjects } from './src/database/preload.js';
@@ -18,6 +19,7 @@ app.use(
 );
 
 app.use(projectsRouters);
+app.use(loginRoute);
 
 mongoose.set('strictQuery', true);
 mongoose
